@@ -41,12 +41,15 @@
 )
 
 (defrule final
+ ?f1 <- (montacargas ?m ?carga paquete1 ?pes1 ?p1 paquete2 ?pes2 ?p2 paquete3 ?pes3 ?p3)
  (destinoPaquete1 ?dest1)
  (destinoPaquete2 ?dest2)
  (destinoPaquete3 ?dest3)
- (test (<> ?dest1 0))
- (test (<> ?dest2 0))
- (test (<> ?dest3 0))
+ (test (= ?dest1 0))
+ (test (= ?dest2 0))
+ (test (= ?dest3 0))
   =>
- (halt)
+   (retract ?f1)
+   (assert (montacargas 0 0 paquete1 ?pes1 ?p1 paquete2 ?pes2 ?p2 paquete3 ?pes3 ?p3))
+   (halt)
 )
